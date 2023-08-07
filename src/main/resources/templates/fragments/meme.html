@@ -1,0 +1,16 @@
+<div class="card" th:fragment="memecard(meme)">
+  <img class="card-img-top" th:src="@{'data:image/jpeg;base64,'+${meme.getBase64Image()}}">
+    <div class="card-body">
+    <h5 class="card-title" th:text="${meme.getTitle()}">No Title</h5>
+    <p class="card-text">Likes <span th:text=" ${meme.getScore()}"></span></p>
+    <button th:attr="onclick=|upvoteMeme('${meme.getId()}')|" type="button" class="btn btn-primary">
+      Upvote
+    </button>
+    <button th:attr="onclick=|downvoteMeme('${meme.getId()}')|" type="button" class="btn btn-primary">
+      Downvote
+    </button>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">uploaded by <span th:text=" ${meme.getUserId()}"></span> on <span th:text=" ${meme.getCreatedDate()}"></span> </small>
+  </div>
+</div>

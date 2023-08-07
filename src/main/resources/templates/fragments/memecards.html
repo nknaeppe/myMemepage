@@ -1,0 +1,5 @@
+<div th:fragment="memelist(memes)" class="row align-items-center">
+    <div class="col-sm-6 justify-content-center align-items-center" th:each="meme : ${memes}">
+        <div th:replace="fragments/meme :: memecard(meme=${meme})"></div>
+    </div>
+</div>

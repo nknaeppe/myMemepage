@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<header th:insert="~{fragments/head}"></header>
+<body>
+<header th:insert="~{fragments/navbar}"></header>
+<main class="container h-100 w-100 justify-content-center align-items-center">
+    <div th:replace="fragments/memecards :: memelist(memes=${memeList})"></div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+    const baseURL = " http://localhost:8080/";
+    const upvoteMeme = (id) => {
+        fetch(baseURL + id + "/upvote",
+            {method: "POST"}
+        ).then((result => {
+            console.log(result)
+            location.reload();
+        }))
+    }
+    const downvoteMeme = (id) => {
+        fetch(baseURL + id + "/downvote",
+            {method: "POST"}
+        ).then((result => {
+            console.log(result);
+            location.reload();
+        }))
+    }</script>
+</body>
+</html>
