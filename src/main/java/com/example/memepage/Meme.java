@@ -23,6 +23,7 @@ public class Meme {
     @CreatedDate
     private LocalDateTime createdDate;
     private String userId;
+    private String username;
     private String title;
     private Binary image;
     private Set<String> upVotedUsers;
@@ -39,16 +40,10 @@ public class Meme {
     }
 
     public int getUpvotes() {
-        if (upVotedUsers == null) {
-            return 0;
-        }
         return upVotedUsers.size();
     }
 
     public int getDownVotes() {
-        if (downVotedUsers == null) {
-            return 0;
-        }
         return downVotedUsers.size();
     }
 

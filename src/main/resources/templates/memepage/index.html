@@ -10,19 +10,19 @@
 <script>
     const baseURL = " http://localhost:8080/";
     const upvoteMeme = (id) => {
-        fetch(baseURL + id + "/upvote",
+        fetch(baseURL + "upvote/" + id,
             {method: "POST"}
         ).then((result => {
-            console.log(result)
             location.reload();
+            console.log(result);
         }))
     }
     const downvoteMeme = (id) => {
-        fetch(baseURL + id + "/downvote",
+        fetch(baseURL + "downvote/" + id,
             {method: "POST"}
         ).then((result => {
-            console.log(result);
             location.reload();
+            console.log(result);
         }))
     }</script>
 </body>

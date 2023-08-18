@@ -115,7 +115,8 @@ class MemeServiceTest {
 
     @Test
     void testUploadMeme() throws IOException {
-        String uuid = "b85d5822-2837-4a1e-a395-fdfb9555cb27";
+        String userId = "b85d5822-2837-4a1e-a395-fdfb9555cb27";
+        String username = "bibo";
         ObjectId memeId = new ObjectId("64d1331c5c4ebf345206b385");
 
         MockMultipartFile file = new MockMultipartFile(
@@ -127,13 +128,14 @@ class MemeServiceTest {
 
         Meme newMeme = new Meme();
         newMeme.setId(memeId);
-        newMeme.setUserId(uuid);
+        newMeme.setUsername(username);
+        newMeme.setUserId(userId);
         newMeme.setTitle("random Title");
         Binary image = new Binary(file.getBytes());
         newMeme.setImage(image);
-
         when(memeRepository.save(any())).thenReturn(newMeme);
-        Meme uploadedMeme = Assertions.assertDoesNotThrow(() -> memeService.uploadMeme(uuid, "random Title", file));
+
+        Meme uploadedMeme = Assertions.assertDoesNotThrow(() -> memeService.uploadMeme(userId, username, "random Title", file));
         Assertions.assertEquals("random Title", uploadedMeme.getTitle());
         Assertions.assertEquals(new Binary(file.getBytes()), uploadedMeme.getImage());
     }

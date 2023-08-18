@@ -56,7 +56,9 @@ public class MemeController {
     @PostMapping("/newpost")
     public String createPost(Authentication authentication, @RequestPart String title, @RequestPart MultipartFile image) throws IOException {
         DefaultOidcUser principal = (DefaultOidcUser) authentication.getPrincipal();
-        memeService.uploadMeme(principal.getSubject(), title, image);
+        String userid = principal.getSubject();
+        String username = principal.getName();
+        memeService.uploadMeme(userid, username, title, image);
         return "memepage/index";
     }
 
@@ -68,7 +70,7 @@ public class MemeController {
         return "memepage/index";
     }
 
-    @PostMapping("/downvote/{id}/")
+    @PostMapping("/downvote/{id}")
     public String downVoteMeme(Authentication authentication, @PathVariable("id") String id) {
         DefaultOidcUser principal = (DefaultOidcUser) authentication.getPrincipal();
         String userId = principal.getSubject();

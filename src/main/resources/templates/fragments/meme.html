@@ -11,6 +11,6 @@
     </button>
   </div>
   <div class="card-footer">
-    <small class="text-muted">uploaded by <span th:text=" ${meme.getUserId()}"></span> on <span th:text=" ${meme.getCreatedDate()}"></span> </small>
+    <small class="text-muted">uploaded by <span th:text=" ${meme.getUsername()}"></span> on <span th:text="${#temporals.format(meme.getCreatedDate(),  'dd.mm.yyyy')}"></span> </small>
   </div>
 </div>
