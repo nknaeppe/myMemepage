@@ -31,7 +31,7 @@ public class MemeController {
     public String getMeme(Model model, @PathVariable("id") String id) {
         Optional<Meme> meme = memeService.getMeme(id);
         meme.ifPresent(value -> model.addAttribute("meme", value));
-        return "memepage/singleMemePost";
+        return "memepage/singleMemeView";
     }
 
     @GetMapping
@@ -41,16 +41,25 @@ public class MemeController {
         return "memepage/index";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/top")
     public String newMemes(Model model) {
-        List<Meme> newMemes = memeService.getNewMemes();
-        model.addAttribute("memes", newMemes);
+        List<Meme> newMemes = memeService.getTopMemes();
+        model.addAttribute("memeList", newMemes);
         return "memepage/index";
     }
 
     @GetMapping("/newpost")
     public String createPost() {
         return "memepage/newMemePost";
+    }
+
+    @GetMapping("/myPosts")
+    public String createPost(Authentication authentication, Model model) {
+        DefaultOidcUser principal = (DefaultOidcUser) authentication.getPrincipal();
+        String userid = principal.getSubject();
+        List<Meme> memesOfUser = memeService.getMemesByUser(userid);
+        model.addAttribute("memeList", memesOfUser);
+        return "memepage/index";
     }
 
     @PostMapping("/newpost")

@@ -67,7 +67,7 @@ class MemeServiceTest {
 
         when(memeRepository.findAll(Sort.by(Sort.Direction.ASC, "createdDate"))).thenReturn(mockMemes);
 
-        List<Meme> result = memeService.getNewMemes();
+        List<Meme> result = memeService.getTopMemes();
 
         assertEquals(3, result.size());
         assertEquals(meme1, result.get(0));

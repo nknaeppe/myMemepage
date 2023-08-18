@@ -30,9 +30,14 @@ public class MemeService {
         return memeRepository.findAll();
     }
 
-    public List<Meme> getNewMemes() {
-        return memeRepository.findAll(Sort.by(Sort.Direction.ASC, "createdDate"));
+    public List<Meme> getTopMemes() {
+        return memeRepository.findAll(Sort.by(Sort.Direction.DESC, "upVotedUsers"));
     }
+
+    public List<Meme> getMemesByUser(String userId) {
+        return memeRepository.findAllByUserId(userId);
+    }
+
 
     public void upVoteMeme(String memeId, String userId) {
         Meme meme = findMeme(memeId);

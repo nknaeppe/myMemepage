@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head th:insert="~{fragments/head}"></head>
+<body>
+<header th:insert="~{fragments/navbar}"></header>
+<main class="container" style="display: flex; justify-content: center">
+    <div class="card" style="width: 100vw">
+        <img class="card-img-top" th:src="@{'data:image/jpeg;base64,'+${meme.getBase64Image()}}"
+             alt="${meme.getTitle()}">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${meme.getTitle()}">No Title</h5>
+            <p class="card-text">Likes <span th:text=" ${meme.getScore()}"></span></p>
+            <button th:attr="onclick=|upvoteMeme('${meme.getId()}')|" type="button" class="btn btn-primary">
+                Upvote
+            </button>
+            <button th:attr="onclick=|downvoteMeme('${meme.getId()}')|" type="button" class="btn btn-primary">
+                Downvote
+            </button>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">uploaded by <span th:text=" ${meme.getUsername()}"></span> on <span
+                    th:text="${#temporals.format(meme.getCreatedDate(),  'dd.mm.yyyy')}"></span> </small>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+    const baseURL = " http://localhost:8080/";
+    const upvoteMeme = (id) => {
+        fetch(baseURL + "upvote/" + id,
+            {method: "POST"}
+        ).then((result => {
+            location.reload();
+            console.log(result);
+        }))
+    }
+    const downvoteMeme = (id) => {
+        fetch(baseURL + "downvote/" + id,
+            {method: "POST"}
+        ).then((result => {
+            location.reload();
+            console.log(result);
+        }))
+    }</script>
+</body>
+</html>
