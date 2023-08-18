@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
-<header th:insert="~{fragments/head}"></header>
-
-<main>
-    <div class="ui center aligned basic segment">
-        <h2 class="ui center aligned icon header">
-            <i class="circular users icon"></i>
-            Sign in
-        </h2>
-        <div class="ui compact labeled icon menu">
-            <a class="item" th:href="@{/oauth2/authorization/keycloak}">
-                <i class="openid alternate icon"></i>
-                Keycloak
-            </a>
+<header th:insert="~{fragments/head}">
+</header>
+<body>
+    <main class="container">
+        <div class="ui center aligned basic segment">
+            <div class="ui compact labeled icon menu">
+                <a class="item" th:href="@{/oauth2/authorization/keycloak}">
+                    <button type="button" class="btn btn-primary btn-lg">Log In</button>
+                </a>
+            </div>
         </div>
-    </div>
-</main>
-
+    </main>
+</body>
 </html>
